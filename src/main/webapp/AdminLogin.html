@@ -1,0 +1,300 @@
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<center>
+		<h1>
+			<form action="admin" method="post">
+				Username <input type="text" name="uname"><br><br>
+				Password <input type="password" name="upwd"><br><br>
+				
+				<input type="submit" value="Login">
+			</form>
+		</h1>
+	</center>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #eef2ff, #dbeafe);
+        padding: 20px;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 420px;
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 18px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .admin-icon {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #dbeafe;
+        border-radius: 50%;
+        font-size: 32px;
+    }
+
+    .login-header h1 {
+        color: #1e293b;
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .login-header p {
+        color: #64748b;
+        font-size: 14px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        color: #334155;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    .input-wrapper span {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+    }
+
+    .input-wrapper input {
+        width: 100%;
+        padding: 13px 14px 13px 45px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        outline: none;
+        font-size: 15px;
+        color: #1e293b;
+        transition: 0.3s;
+    }
+
+    .input-wrapper input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .error-message {
+        display: none;
+        color: #dc2626;
+        font-size: 13px;
+        margin-top: 6px;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 13px;
+        border: none;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .login-btn:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 22px;
+        color: #64748b;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .back-link:hover {
+        color: #2563eb;
+    }
+
+    @media (max-width: 480px) {
+        .login-container {
+            padding: 30px 22px;
+        }
+
+        .login-header h1 {
+            font-size: 24px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-header">
+        <div class="admin-icon">👨‍💼</div>
+
+        <h1>Admin Login</h1>
+
+        <p>
+            Login to access the administration panel
+        </p>
+    </div>
+
+    <!-- Existing action URL is NOT changed -->
+    <form action="admin" method="post" onsubmit="return validateForm()">
+
+        <!-- Username -->
+        <div class="form-group">
+
+            <label for="uname">
+                Username
+            </label>
+
+            <div class="input-wrapper">
+                <span>👤</span>
+
+                <!-- Existing name is NOT changed -->
+                <input
+                    type="text"
+                    id="uname"
+                    name="uname"
+                    placeholder="Enter your username"
+                    autocomplete="username">
+            </div>
+
+            <div class="error-message" id="usernameError">
+                Please enter your username.
+            </div>
+
+        </div>
+
+
+        <!-- Password -->
+        <div class="form-group">
+
+            <label for="upwd">
+                Password
+            </label>
+
+            <div class="input-wrapper">
+                <span>🔒</span>
+
+                <!-- Existing name is NOT changed -->
+                <input
+                    type="password"
+                    id="upwd"
+                    name="upwd"
+                    placeholder="Enter your password"
+                    autocomplete="current-password">
+            </div>
+
+            <div class="error-message" id="passwordError">
+                Please enter your password.
+            </div>
+
+        </div>
+
+
+        <!-- Login Button -->
+        <input
+            type="submit"
+            value="Login"
+            class="login-btn">
+
+    </form>
+
+
+    <!-- Back URL can be adjusted if your project has a specific page -->
+    <a href="AdminLogin.html" class="back-link">
+        ← Back to Admin Login
+    </a>
+
+</div>
+
+
+<script>
+
+function validateForm() {
+
+    let username = document.getElementById("uname").value.trim();
+    let password = document.getElementById("upwd").value.trim();
+
+    let usernameError = document.getElementById("usernameError");
+    let passwordError = document.getElementById("passwordError");
+
+    let isValid = true;
+
+    // Hide previous errors
+    usernameError.style.display = "none";
+    passwordError.style.display = "none";
+
+
+    // Username validation
+    if (username === "") {
+        usernameError.style.display = "block";
+        isValid = false;
+    }
+
+
+    // Password validation
+    if (password === "") {
+        passwordError.style.display = "block";
+        isValid = false;
+    }
+
+
+    return isValid;
+}
+
+</script>
+
+</body>
+</html>

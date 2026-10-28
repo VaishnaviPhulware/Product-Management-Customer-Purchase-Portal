@@ -1,0 +1,527 @@
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<center>
+		<h1>
+			<form action="aps" method="post">
+			Product code <input type="text" name="pcode"><br><br>
+			Product Name <input type="text" name="pname"><br><br>
+			Product Company <input type="text" name="pcmpy"><br><br>
+			Product price <input type="text" name="pprice"><br><br>
+			Product Quantity <input type="text" name="pqty"><br><br>
+			<input type="submit" value="Add Product"><br><br>
+			</form>
+		</h1>
+	</center>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Product</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        background: #f1f5f9;
+        color: #1e293b;
+    }
+
+
+    /* =========================
+       Navigation Bar
+    ========================= */
+
+    .navbar {
+        height: 70px;
+        background: #1e3a8a;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 6%;
+        color: white;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .back-link {
+        text-decoration: none;
+        color: white;
+        background: #475569;
+        padding: 9px 18px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .back-link:hover {
+        background: #334155;
+    }
+
+
+    /* =========================
+       Main Container
+    ========================= */
+
+    .page-container {
+        width: 90%;
+        max-width: 650px;
+        margin: 50px auto;
+    }
+
+
+    /* =========================
+       Form Card
+    ========================= */
+
+    .form-card {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        border: 1px solid #e2e8f0;
+    }
+
+
+    /* =========================
+       Form Header
+    ========================= */
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .product-icon {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #dbeafe;
+        border-radius: 50%;
+        font-size: 32px;
+    }
+
+    .form-header h1 {
+        color: #1e293b;
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .form-header p {
+        color: #64748b;
+        font-size: 14px;
+    }
+
+
+    /* =========================
+       Form Fields
+    ========================= */
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        color: #334155;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .required {
+        color: #dc2626;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 13px 15px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        outline: none;
+        color: #1e293b;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    .form-group input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .form-group input.error {
+        border-color: #dc2626;
+    }
+
+    .error-message {
+        display: none;
+        color: #dc2626;
+        font-size: 13px;
+        margin-top: 6px;
+    }
+
+
+    /* =========================
+       Add Product Button
+    ========================= */
+
+    .submit-btn {
+        width: 100%;
+        padding: 13px;
+        border: none;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+    }
+
+
+    /* =========================
+       Responsive Design
+    ========================= */
+
+    @media (max-width: 600px) {
+
+        .navbar {
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 18px;
+        }
+
+        .page-container {
+            width: 92%;
+            margin: 30px auto;
+        }
+
+        .form-card {
+            padding: 30px 22px;
+        }
+
+        .form-header h1 {
+            font-size: 24px;
+        }
+
+    }
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     Navigation Bar
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Admin Panel
+    </div>
+
+    <!-- Existing URL is NOT changed -->
+    <a href="AdminHome.jsp" class="back-link">
+        ← Dashboard
+    </a>
+
+</nav>
+
+
+<!-- =========================
+     Main Content
+========================= -->
+
+<main class="page-container">
+
+    <div class="form-card">
+
+
+        <!-- Form Header -->
+
+        <div class="form-header">
+
+            <div class="product-icon">
+                📦
+            </div>
+
+            <h1>
+                Add New Product
+            </h1>
+
+            <p>
+                Enter the product details below to add a new product.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             Product Form
+        ========================= -->
+
+        <!-- Existing action and method NOT changed -->
+
+        <form action="aps" method="post" onsubmit="return validateProductForm()">
+
+
+            <!-- Product Code -->
+
+            <div class="form-group">
+
+                <label for="pcode">
+                    Product Code <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="pcode"
+                    name="pcode"
+                    placeholder="Enter product code">
+
+                <div class="error-message" id="pcodeError">
+                    Please enter the product code.
+                </div>
+
+            </div>
+
+
+            <!-- Product Name -->
+
+            <div class="form-group">
+
+                <label for="pname">
+                    Product Name <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="pname"
+                    name="pname"
+                    placeholder="Enter product name">
+
+                <div class="error-message" id="pnameError">
+                    Please enter the product name.
+                </div>
+
+            </div>
+
+
+            <!-- Product Company -->
+
+            <div class="form-group">
+
+                <label for="pcmpy">
+                    Product Company <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="pcmpy"
+                    name="pcmpy"
+                    placeholder="Enter company name">
+
+                <div class="error-message" id="pcmpyError">
+                    Please enter the product company.
+                </div>
+
+            </div>
+
+
+            <!-- Product Price -->
+
+            <div class="form-group">
+
+                <label for="pprice">
+                    Product Price <span class="required">*</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="pprice"
+                    name="pprice"
+                    placeholder="Enter product price"
+                    min="0"
+                    step="0.01">
+
+                <div class="error-message" id="ppriceError">
+                    Please enter a valid product price.
+                </div>
+
+            </div>
+
+
+            <!-- Product Quantity -->
+
+            <div class="form-group">
+
+                <label for="pqty">
+                    Product Quantity <span class="required">*</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="pqty"
+                    name="pqty"
+                    placeholder="Enter product quantity"
+                    min="1"
+                    step="1">
+
+                <div class="error-message" id="pqtyError">
+                    Please enter a valid quantity.
+                </div>
+
+            </div>
+
+
+            <!-- Submit Button -->
+
+            <input
+                type="submit"
+                value="Add Product"
+                class="submit-btn">
+
+
+        </form>
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     JavaScript Validation
+========================= -->
+
+<script>
+
+function validateProductForm() {
+
+    let pcode = document.getElementById("pcode");
+    let pname = document.getElementById("pname");
+    let pcmpy = document.getElementById("pcmpy");
+    let pprice = document.getElementById("pprice");
+    let pqty = document.getElementById("pqty");
+
+    let isValid = true;
+
+
+    // Hide previous errors
+
+    document.querySelectorAll(".error-message").forEach(function(error) {
+        error.style.display = "none";
+    });
+
+    document.querySelectorAll("input").forEach(function(input) {
+        input.classList.remove("error");
+    });
+
+
+    // Product Code Validation
+
+    if (pcode.value.trim() === "") {
+
+        document.getElementById("pcodeError").style.display = "block";
+        pcode.classList.add("error");
+
+        isValid = false;
+    }
+
+
+    // Product Name Validation
+
+    if (pname.value.trim() === "") {
+
+        document.getElementById("pnameError").style.display = "block";
+        pname.classList.add("error");
+
+        isValid = false;
+    }
+
+
+    // Product Company Validation
+
+    if (pcmpy.value.trim() === "") {
+
+        document.getElementById("pcmpyError").style.display = "block";
+        pcmpy.classList.add("error");
+
+        isValid = false;
+    }
+
+
+    // Product Price Validation
+
+    if (pprice.value.trim() === "" || Number(pprice.value) < 0) {
+
+        document.getElementById("ppriceError").style.display = "block";
+        pprice.classList.add("error");
+
+        isValid = false;
+    }
+
+
+    // Product Quantity Validation
+
+    if (pqty.value.trim() === "" || Number(pqty.value) < 1) {
+
+        document.getElementById("pqtyError").style.display = "block";
+        pqty.classList.add("error");
+
+        isValid = false;
+    }
+
+
+    return isValid;
+
+}
+
+</script>
+
+
+</body>
+
+</html>

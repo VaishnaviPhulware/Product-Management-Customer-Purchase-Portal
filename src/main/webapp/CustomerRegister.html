@@ -1,0 +1,1330 @@
+<!-- 
+	<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<center>
+		<h1>
+			<form action="creg" method="post">
+				UserName <input type="text" name="uname"><br><br>
+				Password <input type="text" name="upwd"><br><br>
+				FirstName <input type="text" name="fname"><br><br>
+				LastName <input type="text" name="lname"><br><br>
+				Address <input type="text" name="addr"><br><br>
+				Mail Id <input type="text" name="mail"><br><br>
+				Mobile <input type="text" name="phno"><br><br>
+				
+				<input type="submit" value="Register"><br><br>
+			</form>
+		</h1>
+	</center>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Customer Registration</title>
+
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    min-height: 100vh;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background: #f4f7fb;
+
+    color: #1e293b;
+
+    padding-bottom: 40px;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    width: 100%;
+
+    height: 70px;
+
+    background: #1e3a8a;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.logo {
+    color: white;
+
+    font-size: 22px;
+
+    font-weight: 700;
+}
+
+
+.login-link {
+    color: white;
+
+    text-decoration: none;
+
+    background: #2563eb;
+
+    padding: 9px 18px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+.login-link:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    width: 90%;
+
+    max-width: 650px;
+
+    margin: 45px auto;
+}
+
+
+/* =========================
+   REGISTER CARD
+========================= */
+
+.register-card {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 16px;
+
+    padding: 40px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.page-header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.register-icon {
+    width: 70px;
+
+    height: 70px;
+
+    border-radius: 50%;
+
+    background: #dbeafe;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 32px;
+
+    margin: 0 auto 18px;
+}
+
+
+.page-header h1 {
+    color: #1e293b;
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+
+.page-header p {
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 19px;
+}
+
+
+.form-group label {
+    display: block;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+
+.required {
+    color: #dc2626;
+}
+
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: white;
+
+    color: #1e293b;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+
+.form-group input:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+.form-group input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================
+   VALID / INVALID
+========================= */
+
+.form-group input.valid {
+    border-color: #16a34a;
+}
+
+
+.form-group input.invalid {
+    border-color: #dc2626;
+}
+
+
+.error {
+    display: none;
+
+    color: #dc2626;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================
+   PASSWORD STRENGTH
+========================= */
+
+.password-strength {
+    display: none;
+
+    font-size: 12px;
+
+    margin-top: 6px;
+}
+
+
+.weak {
+    color: #dc2626;
+}
+
+
+.medium {
+    color: #d97706;
+}
+
+
+.strong {
+    color: #15803d;
+}
+
+
+/* =========================
+   REGISTER BUTTON
+========================= */
+
+.register-btn {
+    width: 100%;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 13px;
+
+    margin-top: 8px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.register-btn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+}
+
+
+/* =========================
+   LOGIN TEXT
+========================= */
+
+.login-text {
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    margin-top: 22px;
+}
+
+
+.login-text a {
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.login-text a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    text-align: center;
+
+    margin-top: 30px;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+
+    .logo {
+        font-size: 18px;
+    }
+
+
+    .container {
+        width: 92%;
+
+        margin: 30px auto;
+    }
+
+
+    .register-card {
+        padding: 28px 20px;
+    }
+
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+
+    <div class="logo">
+        Customer Portal
+    </div>
+
+
+    <a
+        href="CustomerLogin.html"
+        class="login-link">
+
+        Login
+
+    </a>
+
+
+</nav>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+    <div class="register-card">
+
+
+        <!-- =========================
+             HEADER
+        ========================= -->
+
+        <div class="page-header">
+
+
+            <div class="register-icon">
+                👤
+            </div>
+
+
+            <h1>
+                Create Your Account
+            </h1>
+
+
+            <p>
+                Register as a customer and start exploring our products.
+            </p>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             REGISTRATION FORM
+        ========================= -->
+
+        <form
+            action="creg"
+            method="post"
+            onsubmit="return validateForm();">
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="uname">
+                    Username <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="uname"
+                    name="uname"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    maxlength="30"
+                    oninput="validateUsername();">
+
+                <div
+                    id="unameError"
+                    class="error">
+                </div>
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="upwd">
+                    Password <span class="required">*</span>
+                </label>
+
+                <input
+                    type="password"
+                    id="upwd"
+                    name="upwd"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    maxlength="30"
+                    oninput="validatePassword();">
+
+                <div
+                    id="passwordStrength"
+                    class="password-strength">
+                </div>
+
+                <div
+                    id="upwdError"
+                    class="error">
+                </div>
+
+            </div>
+
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password <span class="required">*</span>
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Re-enter your password"
+                    autocomplete="new-password"
+                    maxlength="30"
+                    oninput="validateConfirmPassword();">
+
+                <div
+                    id="confirmPasswordError"
+                    class="error">
+                </div>
+
+            </div>
+
+
+
+            <!-- FIRST NAME -->
+
+            <div class="form-group">
+
+                <label for="fname">
+                    First Name <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="fname"
+                    name="fname"
+                    placeholder="Enter your first name"
+                    maxlength="30"
+                    oninput="validateName('fname', 'fnameError', 'First name');">
+
+                <div
+                    id="fnameError"
+                    class="error">
+                </div>
+
+            </div>
+
+
+
+            <!-- LAST NAME -->
+
+            <div class="form-group">
+
+                <label for="lname">
+                    Last Name <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="lname"
+                    name="lname"
+                    placeholder="Enter your last name"
+                    maxlength="30"
+                    oninput="validateName('lname', 'lnameError', 'Last name');">
+
+                <div
+                    id="lnameError"
+                    class="error">
+                </div>
+
+            </div>
+
+
+
+            <!-- ADDRESS -->
+
+            <div class="form-group">
+
+                <label for="addr">
+                    Address <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="addr"
+                    name="addr"
+                    placeholder="Enter your address"
+                    maxlength="150"
+                    oninput="validateAddress();">
+
+                <div
+                    id="addrError"
+                    class="error">
+                </div>
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="mail">
+                    Email Address <span class="required">*</span>
+                </label>
+
+                <input
+                    type="email"
+                    id="mail"
+                    name="mail"
+                    placeholder="example@email.com"
+                    maxlength="80"
+                    autocomplete="email"
+                    oninput="validateEmail();">
+
+                <div
+                    id="mailError"
+                    class="error">
+                </div>
+
+            </div>
+
+
+
+            <!-- MOBILE -->
+
+            <div class="form-group">
+
+                <label for="phno">
+                    Mobile Number <span class="required">*</span>
+                </label>
+
+                <input
+                    type="tel"
+                    id="phno"
+                    name="phno"
+                    placeholder="Enter 10-digit mobile number"
+                    maxlength="10"
+                    inputmode="numeric"
+                    oninput="validateMobile();">
+
+                <div
+                    id="phnoError"
+                    class="error">
+                </div>
+
+            </div>
+
+
+
+            <!-- SUBMIT -->
+
+            <input
+                type="submit"
+                value="Create Account"
+                class="register-btn">
+
+
+        </form>
+
+
+
+        <!-- LOGIN -->
+
+        <div class="login-text">
+
+            Already have an account?
+
+            <a href="CustomerLogin.html">
+                Login here
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer">
+
+        Customer Management System &copy; 2026
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =========================
+     JAVASCRIPT VALIDATION
+========================= -->
+
+<script>
+
+
+/* =========================
+   HELPER FUNCTIONS
+========================= */
+
+function showError(input, errorElement, message) {
+
+    input.classList.add("invalid");
+
+    input.classList.remove("valid");
+
+    errorElement.innerHTML = message;
+
+    errorElement.style.display = "block";
+
+}
+
+
+function showValid(input, errorElement) {
+
+    input.classList.remove("invalid");
+
+    input.classList.add("valid");
+
+    errorElement.style.display = "none";
+
+}
+
+
+function hideError(input, errorElement) {
+
+    input.classList.remove("invalid");
+
+    errorElement.style.display = "none";
+
+}
+
+
+
+/* =========================
+   USERNAME
+========================= */
+
+function validateUsername() {
+
+    var input =
+        document.getElementById("uname");
+
+    var error =
+        document.getElementById("unameError");
+
+    var value =
+        input.value.trim();
+
+
+    if (value === "") {
+
+        showError(
+            input,
+            error,
+            "Username is required."
+        );
+
+        return false;
+
+    }
+
+
+    if (value.length < 4) {
+
+        showError(
+            input,
+            error,
+            "Username must contain at least 4 characters."
+        );
+
+        return false;
+
+    }
+
+
+    if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+
+        showError(
+            input,
+            error,
+            "Username can contain only letters, numbers and underscore."
+        );
+
+        return false;
+
+    }
+
+
+    showValid(input, error);
+
+    return true;
+
+}
+
+
+
+/* =========================
+   PASSWORD
+========================= */
+
+function validatePassword() {
+
+    var input =
+        document.getElementById("upwd");
+
+    var error =
+        document.getElementById("upwdError");
+
+    var strength =
+        document.getElementById("passwordStrength");
+
+    var value =
+        input.value;
+
+
+    if (value === "") {
+
+        showError(
+            input,
+            error,
+            "Password is required."
+        );
+
+        strength.style.display = "none";
+
+        return false;
+
+    }
+
+
+    if (value.length < 8) {
+
+        showError(
+            input,
+            error,
+            "Password must contain at least 8 characters."
+        );
+
+        strength.innerHTML =
+            "Weak password";
+
+        strength.className =
+            "password-strength weak";
+
+        strength.style.display =
+            "block";
+
+        return false;
+
+    }
+
+
+    if (!/[A-Z]/.test(value) ||
+        !/[a-z]/.test(value) ||
+        !/[0-9]/.test(value)) {
+
+        showError(
+            input,
+            error,
+            "Use uppercase, lowercase letters and numbers."
+        );
+
+        strength.innerHTML =
+            "Medium password";
+
+        strength.className =
+            "password-strength medium";
+
+        strength.style.display =
+            "block";
+
+        return false;
+
+    }
+
+
+    showValid(input, error);
+
+    strength.innerHTML =
+        "Strong password";
+
+    strength.className =
+        "password-strength strong";
+
+    strength.style.display =
+        "block";
+
+
+    validateConfirmPassword();
+
+    return true;
+
+}
+
+
+
+/* =========================
+   CONFIRM PASSWORD
+========================= */
+
+function validateConfirmPassword() {
+
+    var password =
+        document.getElementById("upwd");
+
+    var confirmPassword =
+        document.getElementById("confirmPassword");
+
+    var error =
+        document.getElementById("confirmPasswordError");
+
+
+    if (confirmPassword.value === "") {
+
+        showError(
+            confirmPassword,
+            error,
+            "Please confirm your password."
+        );
+
+        return false;
+
+    }
+
+
+    if (password.value !== confirmPassword.value) {
+
+        showError(
+            confirmPassword,
+            error,
+            "Passwords do not match."
+        );
+
+        return false;
+
+    }
+
+
+    showValid(confirmPassword, error);
+
+    return true;
+
+}
+
+
+
+/* =========================
+   FIRST / LAST NAME
+========================= */
+
+function validateName(
+    inputId,
+    errorId,
+    fieldName
+) {
+
+    var input =
+        document.getElementById(inputId);
+
+    var error =
+        document.getElementById(errorId);
+
+    var value =
+        input.value.trim();
+
+
+    if (value === "") {
+
+        showError(
+            input,
+            error,
+            fieldName + " is required."
+        );
+
+        return false;
+
+    }
+
+
+    if (!/^[a-zA-Z ]+$/.test(value)) {
+
+        showError(
+            input,
+            error,
+            fieldName + " should contain only letters."
+        );
+
+        return false;
+
+    }
+
+
+    if (value.length < 2) {
+
+        showError(
+            input,
+            error,
+            fieldName + " must contain at least 2 characters."
+        );
+
+        return false;
+
+    }
+
+
+    showValid(input, error);
+
+    return true;
+
+}
+
+
+
+/* =========================
+   ADDRESS
+========================= */
+
+function validateAddress() {
+
+    var input =
+        document.getElementById("addr");
+
+    var error =
+        document.getElementById("addrError");
+
+    var value =
+        input.value.trim();
+
+
+    if (value === "") {
+
+        showError(
+            input,
+            error,
+            "Address is required."
+        );
+
+        return false;
+
+    }
+
+
+    if (value.length < 5) {
+
+        showError(
+            input,
+            error,
+            "Please enter a valid address."
+        );
+
+        return false;
+
+    }
+
+
+    showValid(input, error);
+
+    return true;
+
+}
+
+
+
+/* =========================
+   EMAIL
+========================= */
+
+function validateEmail() {
+
+    var input =
+        document.getElementById("mail");
+
+    var error =
+        document.getElementById("mailError");
+
+    var value =
+        input.value.trim();
+
+
+    var emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    if (value === "") {
+
+        showError(
+            input,
+            error,
+            "Email address is required."
+        );
+
+        return false;
+
+    }
+
+
+    if (!emailPattern.test(value)) {
+
+        showError(
+            input,
+            error,
+            "Please enter a valid email address."
+        );
+
+        return false;
+
+    }
+
+
+    showValid(input, error);
+
+    return true;
+
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+function validateMobile() {
+
+    var input =
+        document.getElementById("phno");
+
+    var error =
+        document.getElementById("phnoError");
+
+    var value =
+        input.value.trim();
+
+
+    /*
+     * Allow only digits
+     */
+
+    input.value =
+        input.value.replace(/\D/g, "");
+
+
+    value =
+        input.value;
+
+
+    if (value === "") {
+
+        showError(
+            input,
+            error,
+            "Mobile number is required."
+        );
+
+        return false;
+
+    }
+
+
+    if (!/^[6-9][0-9]{9}$/.test(value)) {
+
+        showError(
+            input,
+            error,
+            "Enter a valid 10-digit mobile number."
+        );
+
+        return false;
+
+    }
+
+
+    showValid(input, error);
+
+    return true;
+
+}
+
+
+
+/* =========================
+   COMPLETE FORM VALIDATION
+========================= */
+
+function validateForm() {
+
+
+    var usernameValid =
+        validateUsername();
+
+
+    var passwordValid =
+        validatePassword();
+
+
+    var confirmPasswordValid =
+        validateConfirmPassword();
+
+
+    var firstNameValid =
+        validateName(
+            "fname",
+            "fnameError",
+            "First name"
+        );
+
+
+    var lastNameValid =
+        validateName(
+            "lname",
+            "lnameError",
+            "Last name"
+        );
+
+
+    var addressValid =
+        validateAddress();
+
+
+    var emailValid =
+        validateEmail();
+
+
+    var mobileValid =
+        validateMobile();
+
+
+    if (
+        usernameValid &&
+        passwordValid &&
+        confirmPasswordValid &&
+        firstNameValid &&
+        lastNameValid &&
+        addressValid &&
+        emailValid &&
+        mobileValid
+    ) {
+
+        return true;
+
+    }
+
+
+    return false;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
